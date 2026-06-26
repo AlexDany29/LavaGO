@@ -415,7 +415,6 @@
             this.groupBox2.TabIndex = 39;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informacion del Cliente";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // tabPage3
             // 

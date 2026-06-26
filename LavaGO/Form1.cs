@@ -31,7 +31,7 @@ namespace LavaGO
             btnDelete.Click += btnDelete_Click;
             btnPrecioServicios.Click += btnPrecioServicios_Click;
             btnReporteVentas.Click += btnReporteVentas_Click;
-            btnMenus.Click += btnMenu_Click;
+            btnMenus.Click += btnMenus_Click;
         }
         public void MostrarDatos()
         {
@@ -179,23 +179,12 @@ namespace LavaGO
             tabControl1.SelectTab(tabPage2);
         }
 
-        private void btnMenu_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab(tabPage3);
         }
 
         private void btnMenus_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
         {
 
         }
