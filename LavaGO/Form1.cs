@@ -174,6 +174,11 @@ namespace LavaGO
             MessageBox.Show("Por peso: S/. 5.00\nPrendas delicadas: S/. 7.50", "Tarifario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(tabPage2);
+        }
+
         private void btnMenu_Click(object sender, EventArgs e)
         {
 
