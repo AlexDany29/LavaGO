@@ -186,7 +186,7 @@ namespace LavaGO
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-           
+            tabControl1.SelectTab(tabPage3);
         }
 
         private void btnMenus_Click(object sender, EventArgs e)

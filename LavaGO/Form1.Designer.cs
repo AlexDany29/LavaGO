@@ -303,7 +303,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(392, 120);
+            this.btnDelete.Location = new System.Drawing.Point(392, 119);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(123, 31);
@@ -380,7 +380,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(392, 153);
+            this.btnBuscar.Location = new System.Drawing.Point(392, 158);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(123, 30);
