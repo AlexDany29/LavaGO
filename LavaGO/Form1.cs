@@ -140,5 +140,11 @@ namespace LavaGO
             FormHorario frm = new FormHorario();
             frm.ShowDialog();
         }
+
+        private void misiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMision frm = new FormMision();
+            frm.ShowDialog();
+        }
     }
 }

@@ -76,14 +76,14 @@
             // inicioToolStripMenuItem
             // 
             this.inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
-            this.inicioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.inicioToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.inicioToolStripMenuItem.Text = "En proceso";
             this.inicioToolStripMenuItem.Click += new System.EventHandler(this.inicioToolStripMenuItem_Click);
             // 
             // MnuListos
             // 
             this.MnuListos.Name = "MnuListos";
-            this.MnuListos.Size = new System.Drawing.Size(180, 22);
+            this.MnuListos.Size = new System.Drawing.Size(223, 26);
             this.MnuListos.Text = "Listos para Entregar";
             // 
             // funcionesToolStripMenuItem
@@ -137,14 +137,14 @@
             // precioServiciosToolStripMenuItem
             // 
             this.precioServiciosToolStripMenuItem.Name = "precioServiciosToolStripMenuItem";
-            this.precioServiciosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.precioServiciosToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
             this.precioServiciosToolStripMenuItem.Text = "Precio Servicios";
             this.precioServiciosToolStripMenuItem.Click += new System.EventHandler(this.precioServiciosToolStripMenuItem_Click);
             // 
             // reporteVentasToolStripMenuItem
             // 
             this.reporteVentasToolStripMenuItem.Name = "reporteVentasToolStripMenuItem";
-            this.reporteVentasToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.reporteVentasToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
             this.reporteVentasToolStripMenuItem.Text = "Reporte Ventas";
             this.reporteVentasToolStripMenuItem.Click += new System.EventHandler(this.reporteVentasToolStripMenuItem_Click);
             // 
@@ -163,33 +163,34 @@
             // historiaToolStripMenuItem
             // 
             this.historiaToolStripMenuItem.Name = "historiaToolStripMenuItem";
-            this.historiaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.historiaToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.historiaToolStripMenuItem.Text = "Historia";
             this.historiaToolStripMenuItem.Click += new System.EventHandler(this.historiaToolStripMenuItem_Click);
             // 
             // misiónToolStripMenuItem
             // 
             this.misiónToolStripMenuItem.Name = "misiónToolStripMenuItem";
-            this.misiónToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.misiónToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.misiónToolStripMenuItem.Text = "Misión";
+            this.misiónToolStripMenuItem.Click += new System.EventHandler(this.misiónToolStripMenuItem_Click);
             // 
             // visiónToolStripMenuItem
             // 
             this.visiónToolStripMenuItem.Name = "visiónToolStripMenuItem";
-            this.visiónToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.visiónToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.visiónToolStripMenuItem.Text = "Visión";
             // 
             // horarioDeAtenciónToolStripMenuItem
             // 
             this.horarioDeAtenciónToolStripMenuItem.Name = "horarioDeAtenciónToolStripMenuItem";
-            this.horarioDeAtenciónToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.horarioDeAtenciónToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.horarioDeAtenciónToolStripMenuItem.Text = "Horario de atención";
             this.horarioDeAtenciónToolStripMenuItem.Click += new System.EventHandler(this.horarioDeAtencionToolStripMenuItem_Click);
             // 
             // redesSocialesToolStripMenuItem
             // 
             this.redesSocialesToolStripMenuItem.Name = "redesSocialesToolStripMenuItem";
-            this.redesSocialesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.redesSocialesToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.redesSocialesToolStripMenuItem.Text = "Redes Sociales";
             // 
             // Form1
@@ -199,7 +200,7 @@
             this.ClientSize = new System.Drawing.Size(677, 425);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "LavaGO";
             this.menuStrip1.ResumeLayout(false);

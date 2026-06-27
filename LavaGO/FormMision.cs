@@ -15,6 +15,16 @@ namespace LavaGO
         public FormMision()
         {
             InitializeComponent();
+            btnCerrar.Click += btnCerrar_Click;
+        }
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCerrar_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
