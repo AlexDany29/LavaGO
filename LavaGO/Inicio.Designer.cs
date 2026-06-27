@@ -74,7 +74,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(78, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(7);
             this.groupBox1.Size = new System.Drawing.Size(884, 513);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
@@ -85,7 +85,7 @@
             this.dtpFechaEntrega.Enabled = false;
             this.dtpFechaEntrega.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaEntrega.Location = new System.Drawing.Point(572, 444);
-            this.dtpFechaEntrega.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dtpFechaEntrega.Margin = new System.Windows.Forms.Padding(7);
             this.dtpFechaEntrega.Name = "dtpFechaEntrega";
             this.dtpFechaEntrega.Size = new System.Drawing.Size(268, 35);
             this.dtpFechaEntrega.TabIndex = 22;
@@ -106,7 +106,7 @@
             this.cboEstado.Enabled = false;
             this.cboEstado.FormattingEnabled = true;
             this.cboEstado.Location = new System.Drawing.Point(44, 444);
-            this.cboEstado.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.cboEstado.Margin = new System.Windows.Forms.Padding(7);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(473, 37);
             this.cboEstado.TabIndex = 20;
@@ -124,7 +124,7 @@
             // txtImporteTotal
             // 
             this.txtImporteTotal.Location = new System.Drawing.Point(572, 332);
-            this.txtImporteTotal.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtImporteTotal.Margin = new System.Windows.Forms.Padding(7);
             this.txtImporteTotal.Name = "txtImporteTotal";
             this.txtImporteTotal.ReadOnly = true;
             this.txtImporteTotal.Size = new System.Drawing.Size(268, 35);
@@ -143,7 +143,7 @@
             // txtDetalle
             // 
             this.txtDetalle.Location = new System.Drawing.Point(296, 332);
-            this.txtDetalle.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtDetalle.Margin = new System.Windows.Forms.Padding(7);
             this.txtDetalle.Name = "txtDetalle";
             this.txtDetalle.ReadOnly = true;
             this.txtDetalle.Size = new System.Drawing.Size(221, 35);
@@ -164,7 +164,7 @@
             this.cboServicioBusqueda.Enabled = false;
             this.cboServicioBusqueda.FormattingEnabled = true;
             this.cboServicioBusqueda.Location = new System.Drawing.Point(572, 91);
-            this.cboServicioBusqueda.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.cboServicioBusqueda.Margin = new System.Windows.Forms.Padding(7);
             this.cboServicioBusqueda.Name = "cboServicioBusqueda";
             this.cboServicioBusqueda.Size = new System.Drawing.Size(268, 37);
             this.cboServicioBusqueda.TabIndex = 14;
@@ -182,7 +182,7 @@
             // txtPeso
             // 
             this.txtPeso.Location = new System.Drawing.Point(44, 332);
-            this.txtPeso.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtPeso.Margin = new System.Windows.Forms.Padding(7);
             this.txtPeso.Name = "txtPeso";
             this.txtPeso.ReadOnly = true;
             this.txtPeso.Size = new System.Drawing.Size(202, 35);
@@ -201,7 +201,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(44, 91);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(7);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(202, 35);
@@ -210,7 +210,7 @@
             // txtCliente
             // 
             this.txtCliente.Location = new System.Drawing.Point(44, 214);
-            this.txtCliente.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtCliente.Margin = new System.Windows.Forms.Padding(7);
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(795, 35);
@@ -221,7 +221,7 @@
             this.dtpFecha.Enabled = false;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(296, 91);
-            this.dtpFecha.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dtpFecha.Margin = new System.Windows.Forms.Padding(7);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(221, 35);
             this.dtpFecha.TabIndex = 7;
@@ -260,20 +260,20 @@
             // 
             this.dgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCliente.Location = new System.Drawing.Point(28, 607);
-            this.dgvCliente.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dgvCliente.Margin = new System.Windows.Forms.Padding(7);
             this.dgvCliente.Name = "dgvCliente";
             this.dgvCliente.RowHeadersWidth = 92;
-            this.dgvCliente.Size = new System.Drawing.Size(537, 364);
+            this.dgvCliente.Size = new System.Drawing.Size(934, 364);
             this.dgvCliente.TabIndex = 25;
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 648);
+            this.ClientSize = new System.Drawing.Size(1027, 991);
             this.Controls.Add(this.dgvCliente);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.groupBox1.ResumeLayout(false);
