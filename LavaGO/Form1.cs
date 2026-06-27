@@ -12,8 +12,11 @@ namespace LavaGO
         {
             InitializeComponent();
 
-            // Asegurar que el menú "Eliminar" llame al manejador
             this.eliminarToolStripMenuItem.Click += eliminarToolStripMenuItem_Click;
+
+            this.actualizarToolStripMenuItem.Click += actualizarToolStripMenuItem_Click;
+
+            this.MnuListos.Click += listoParaEntregarToolStripMenuItem_Click;
         }
 
         private void inicioToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -80,36 +83,21 @@ namespace LavaGO
         {
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Inicio ventanaInicio)
+                if (f is BotonActualizar ventanaAbierta)
                 {
-                    var ventaSeleccionada = ventanaInicio.ObtenerVentaSeleccionada();
-                    if (ventaSeleccionada == null)
-                    {
-                        MessageBox.Show("Seleccione un registro en la ventana Inicio para actualizar.", "Actualizar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        ventanaInicio.Focus();
-                        return;
-                    }
-
-                    using (var dlg = new BotonActualizar(ventaSeleccionada))
-                    {
-                        if (dlg.ShowDialog() == DialogResult.OK)
-                        {
-                            ventanaInicio.MostrarDatos();
-                        }
-                    }
+                    ventanaAbierta.Focus();
                     return;
                 }
             }
 
-            MessageBox.Show("Abra la ventana Inicio y seleccione un registro para actualizar.", "Actualizar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BotonActualizar ventana = new BotonActualizar();
+            ventana.Show();
         }
 
         private void buscarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             new Buscar().ShowDialog();
         }
-
-        // Nuevo: manejador para el menú Eliminar.
         private void eliminarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             using (var dlg = new Eliminar()) 
@@ -127,22 +115,20 @@ namespace LavaGO
             }
         }
 
-        
-        private void horarioDeAtencionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void listoParaEntregarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            FormHorario frm = new FormHorario();
-            frm.ShowDialog();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is ListosEntregar ventanaAbierta)
+                {
+                    ventanaAbierta.Focus();
+                    return;
+                }
+            }
+
+            ListosEntregar ventana = new ListosEntregar();
+            ventana.Show();
         }
 
-        private void historiaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormHistoria frm = new FormHistoria();
-            frm.ShowDialog();
-        }
-
-        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new BotonEliminar().ShowDialog();
-        }
     }
 }
