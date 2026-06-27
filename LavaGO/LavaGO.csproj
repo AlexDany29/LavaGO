@@ -58,6 +58,12 @@
     <Compile Include="Botones\BotonAgregar.Designer.cs">
       <DependentUpon>BotonAgregar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Botones\BotonEliminar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Botones\BotonEliminar.Designer.cs">
+      <DependentUpon>BotonEliminar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Buscar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Botones\BotonAgregar.resx">
       <DependentUpon>BotonAgregar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Botones\BotonEliminar.resx">
+      <DependentUpon>BotonEliminar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Buscar.resx">
       <DependentUpon>Buscar.cs</DependentUpon>

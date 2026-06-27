@@ -252,7 +252,7 @@
             this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "BotonAgregar";
-            this.Text = "BotonAgregar";
+            this.Text = "Agregar";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
