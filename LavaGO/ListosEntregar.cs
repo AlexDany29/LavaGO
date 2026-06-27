@@ -33,7 +33,6 @@ namespace LavaGO
         {
             if (dgvListos == null) return;
 
-            // Filtrar solo ventas cuyo Estado indica que están listas para entregar.
             var todas = VentaDAO.Listar() ?? new System.Collections.Generic.List<Venta>();
             var listos = todas
                 .Where(v => !string.IsNullOrEmpty(v?.Estado) &&

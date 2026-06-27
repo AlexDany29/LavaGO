@@ -14,10 +14,8 @@ namespace LavaGO
             this.Load += Inicio_Load;
             this.Activated += Inicio_Activated;
 
-            // Inicializar los items de los ComboBox para que puedan mostrar el Estado/Servicio
             InicializarCombos();
 
-            // Suscribir el evento de selección del DataGridView
             this.dgvCliente.SelectionChanged += DgvCliente_SelectionChanged;
         }
 
@@ -38,7 +36,6 @@ namespace LavaGO
             cboServicioBusqueda.Enabled = false;
 
             cboEstado.Items.Clear();
-            // Se añade "Listo para entregar" como tercera opción (índice 2)
             cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Listo para entregar", "Entregado" });
             cboEstado.Enabled = false;
         }
@@ -50,11 +47,10 @@ namespace LavaGO
 
             if (dgvCliente.Columns.Count > 8)
             {
-                dgvCliente.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy"; // Fecha
-                dgvCliente.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy"; // FechaEntrega
+                dgvCliente.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy"; 
+                dgvCliente.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy"; 
             }
 
-            // Seleccionar la primera fila por defecto (si existe) para mostrar datos en los recuadros
             if (dgvCliente.Rows.Count > 0)
             {
                 dgvCliente.ClearSelection();
@@ -86,8 +82,6 @@ namespace LavaGO
                 LimpiarCampos();
                 return;
             }
-
-            // Rellenar controles (usar la cultura actual para formato numérico)
             txtCodigo.Text = venta.Codigo ?? string.Empty;
             dtpFecha.Value = venta.Fecha == default ? DateTime.Now : venta.Fecha;
             txtCliente.Text = venta.Cliente ?? string.Empty;
@@ -108,8 +102,6 @@ namespace LavaGO
                 combo.SelectedIndex = -1;
                 return;
             }
-
-            // Si el valor ya existe lo seleccionamos, si no lo añadimos temporalmente para que se muestre
             if (combo.Items.Contains(value))
             {
                 combo.SelectedItem = value;
@@ -133,8 +125,6 @@ namespace LavaGO
             cboEstado.SelectedIndex = -1;
             dtpFechaEntrega.Value = DateTime.Now;
         }
-
-        // Método auxiliar público (mantengo compatibilidad con usos previos)
         public Venta ObtenerVentaSeleccionada()
         {
             if (dgvCliente == null) return null;

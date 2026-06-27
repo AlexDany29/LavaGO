@@ -14,7 +14,6 @@ namespace LavaGO.Botones
             this.Load += BotonAgregar_Load;
             this.txtPeso.TextChanged += (s, e) => CalcularImporteTotal();
             this.cboServicioBusqueda.SelectedIndexChanged += (s, e) => CalcularImporteTotal();
-            // Aceptar separador decimal según cultura actual en el KeyPress del peso si existe
             this.txtPeso.KeyPress += (s, e) =>
             {
                 char decimalSeparator = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
@@ -60,7 +59,6 @@ namespace LavaGO.Botones
                 return;
             }
 
-            // Parse seguro de detalle e importe total usando cultura actual
             decimal detalle = 0m;
             decimal importeTotal = 0m;
             decimal.TryParse(txtDetalle.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out detalle);

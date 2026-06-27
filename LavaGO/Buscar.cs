@@ -37,7 +37,6 @@ namespace LavaGO
             var listaCompleta = VentaDAO.Listar();
             string opcionSeleccionada = cboOpciones.SelectedItem?.ToString();
 
-            // Filtra dinámicamente según la opción elegida en el ComboBox
             var resultados = listaCompleta.Where(v =>
                 (opcionSeleccionada == "Código" && v.Codigo.ToString().ToLower().Contains(criterio)) ||
                 (opcionSeleccionada == "Nombre" && v.Cliente.ToLower().Contains(criterio))

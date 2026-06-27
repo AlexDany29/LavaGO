@@ -32,7 +32,6 @@ namespace LavaGO.Botones
             txtPeso.Leave += txtPeso_Leave;
             btnActualizar.Click += btnActualizar_Click;
 
-            // Evento para el DataGridView (asegúrate de tener un control DataGridView llamado dgvActualizar en el diseñador)
             if (dgvActualizar != null)
                 dgvActualizar.SelectionChanged += DgvActualizar_SelectionChanged;
         }
@@ -43,17 +42,13 @@ namespace LavaGO.Botones
             cboServicioBusqueda.Items.AddRange(new string[] { "Por peso", "Prendas delicadas" });
 
             cboEstado.Items.Clear();
-            // Se añade "Listo para entregar" como tercera opción (índice 2)
             cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Listo para entregar", "Entregado" });
 
-            // Configurar y poblar el DataGridView con todas las ventas
             if (dgvActualizar != null)
             {
                 ConfigurarDataGridView();
                 CargarGrid();
             }
-
-            // Si se pasó una venta a editar, cargar sus datos en los controles y seleccionar en la tabla
             if (ventaAEditar != null)
             {
                 SeleccionarVentaEnGrid(ventaAEditar.Codigo);
@@ -173,7 +168,6 @@ namespace LavaGO.Botones
 
             VentaDAO.Actualizar(ventaAEditar);
 
-            // Actualizar grid para reflejar cambios
             CargarGrid();
 
             MessageBox.Show("El registro se actualizó correctamente.", "LavaGO", MessageBoxButtons.OK, MessageBoxIcon.Information);

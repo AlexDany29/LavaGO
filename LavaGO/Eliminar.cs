@@ -8,10 +8,9 @@ namespace LavaGO
     {
         public Eliminar()
         {
-            InitializeComponent(); // Llama al diseño de Eliminar.Designer.cs
+            InitializeComponent();
             this.Load += Eliminar_Load;
             
-            // Asignar los eventos a los botones del Diseñador
             this.button1.Click += btnEliminar_Click;
             this.button2.Click += btnRegresar_Click;
         }
@@ -36,7 +35,7 @@ namespace LavaGO
             if (dgvEliminar == null) return;
 
             dgvEliminar.DataSource = null;
-            dgvEliminar.DataSource = VentaDAO.Listar(); // Obtiene la lista global de ventas
+            dgvEliminar.DataSource = VentaDAO.Listar(); 
             dgvEliminar.Refresh();
         }
 
@@ -44,22 +43,18 @@ namespace LavaGO
         {
             if (dgvEliminar == null) return;
 
-            // Verificar si hay una fila seleccionada
             if (dgvEliminar.CurrentRow == null)
             {
                 MessageBox.Show("Por favor, seleccione una fila de la tabla para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Obtener el objeto Venta seleccionado
             Venta ventaSeleccionada = dgvEliminar.CurrentRow.DataBoundItem as Venta;
             if (ventaSeleccionada == null)
             {
                 MessageBox.Show("No se pudo obtener el registro seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            // Confirmación antes de eliminar
             DialogResult res = MessageBox.Show($"¿Está seguro que desea eliminar la venta con código {ventaSeleccionada.Codigo}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             
             if (res == DialogResult.Yes)
@@ -68,8 +63,8 @@ namespace LavaGO
                 if (eliminado)
                 {
                     MessageBox.Show("Registro eliminado con éxito.", "LavaGO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CargarDatos(); // Refresca la tabla local
-                    this.DialogResult = DialogResult.OK; // Notifica que hubo cambios
+                    CargarDatos();
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
@@ -80,7 +75,7 @@ namespace LavaGO
 
         private void btnRegresar_Click(object sender, EventArgs e)
         {
-            this.Close(); // Cierra la ventana actual
+            this.Close(); 
         }
 
     }

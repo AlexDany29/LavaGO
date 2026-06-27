@@ -12,14 +12,10 @@ namespace LavaGO
         {
             InitializeComponent();
 
-            // Asegurar que el menú "Eliminar" llame al manejador
             this.eliminarToolStripMenuItem.Click += eliminarToolStripMenuItem_Click;
 
-            // Suscribir el menú "Actualizar" para abrir el formulario BotonActualizar
-            // Verifica que el nombre del ToolStripMenuItem en el diseñador sea exactamente 'actualizarToolStripMenuItem'
             this.actualizarToolStripMenuItem.Click += actualizarToolStripMenuItem_Click;
 
-            // Suscribir el menú "Listo para entregar" (ajusta el nombre si su control se llama distinto)
             this.MnuListos.Click += listoParaEntregarToolStripMenuItem_Click;
         }
 
@@ -102,8 +98,6 @@ namespace LavaGO
         {
             new Buscar().ShowDialog();
         }
-
-        // Nuevo: manejador para el menú Eliminar.
         private void eliminarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             using (var dlg = new Eliminar()) 
