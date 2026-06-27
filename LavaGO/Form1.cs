@@ -14,6 +14,13 @@ namespace LavaGO
 
             // Asegurar que el menú "Eliminar" llame al manejador
             this.eliminarToolStripMenuItem.Click += eliminarToolStripMenuItem_Click;
+
+            // Suscribir el menú "Actualizar" para abrir el formulario BotonActualizar
+            // Verifica que el nombre del ToolStripMenuItem en el diseñador sea exactamente 'actualizarToolStripMenuItem'
+            this.actualizarToolStripMenuItem.Click += actualizarToolStripMenuItem_Click;
+
+            // Suscribir el menú "Listo para entregar" (ajusta el nombre si su control se llama distinto)
+            this.MnuListos.Click += listoParaEntregarToolStripMenuItem_Click;
         }
 
         private void inicioToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -80,28 +87,15 @@ namespace LavaGO
         {
             foreach (Form f in Application.OpenForms)
             {
-                if (f is Inicio ventanaInicio)
+                if (f is BotonActualizar ventanaAbierta)
                 {
-                    var ventaSeleccionada = ventanaInicio.ObtenerVentaSeleccionada();
-                    if (ventaSeleccionada == null)
-                    {
-                        MessageBox.Show("Seleccione un registro en la ventana Inicio para actualizar.", "Actualizar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        ventanaInicio.Focus();
-                        return;
-                    }
-
-                    using (var dlg = new BotonActualizar(ventaSeleccionada))
-                    {
-                        if (dlg.ShowDialog() == DialogResult.OK)
-                        {
-                            ventanaInicio.MostrarDatos();
-                        }
-                    }
+                    ventanaAbierta.Focus();
                     return;
                 }
             }
 
-            MessageBox.Show("Abra la ventana Inicio y seleccione un registro para actualizar.", "Actualizar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BotonActualizar ventana = new BotonActualizar();
+            ventana.Show();
         }
 
         private void buscarToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -127,9 +121,19 @@ namespace LavaGO
             }
         }
 
-        private void informaci(object sender, EventArgs e)
+        private void listoParaEntregarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is ListosEntregar ventanaAbierta)
+                {
+                    ventanaAbierta.Focus();
+                    return;
+                }
+            }
 
+            ListosEntregar ventana = new ListosEntregar();
+            ventana.Show();
         }
     }
 }

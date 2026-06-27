@@ -1,5 +1,4 @@
-﻿using LavaGO.Botones;
-using LavaGO.Clase;
+﻿using LavaGO.Clase;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
@@ -39,7 +38,8 @@ namespace LavaGO
             cboServicioBusqueda.Enabled = false;
 
             cboEstado.Items.Clear();
-            cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Entregado" });
+            // Se añade "Listo para entregar" como tercera opción (índice 2)
+            cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Listo para entregar", "Entregado" });
             cboEstado.Enabled = false;
         }
 

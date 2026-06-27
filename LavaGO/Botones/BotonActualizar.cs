@@ -1,7 +1,8 @@
-﻿using LavaGO.Clase;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Globalization;
+using LavaGO.Clase;
+using System.Linq;
 
 namespace LavaGO.Botones
 {
@@ -30,6 +31,10 @@ namespace LavaGO.Botones
             txtPeso.KeyPress += txtPeso_KeyPress;
             txtPeso.Leave += txtPeso_Leave;
             btnActualizar.Click += btnActualizar_Click;
+
+            // Evento para el DataGridView (asegúrate de tener un control DataGridView llamado dgvActualizar en el diseñador)
+            if (dgvActualizar != null)
+                dgvActualizar.SelectionChanged += DgvActualizar_SelectionChanged;
         }
 
         private void BotonActualizar_Load(object sender, EventArgs e)
@@ -38,20 +43,89 @@ namespace LavaGO.Botones
             cboServicioBusqueda.Items.AddRange(new string[] { "Por peso", "Prendas delicadas" });
 
             cboEstado.Items.Clear();
-            cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Entregado" });
+            // Se añade "Listo para entregar" como tercera opción (índice 2)
+            cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Listo para entregar", "Entregado" });
 
+            // Configurar y poblar el DataGridView con todas las ventas
+            if (dgvActualizar != null)
+            {
+                ConfigurarDataGridView();
+                CargarGrid();
+            }
+
+            // Si se pasó una venta a editar, cargar sus datos en los controles y seleccionar en la tabla
             if (ventaAEditar != null)
             {
-                txtCodigo.Text = ventaAEditar.Codigo;
-                dtpFecha.Value = ventaAEditar.Fecha;
-                dtpFechaEntrega.Value = ventaAEditar.FechaEntrega;
-                txtCliente.Text = ventaAEditar.Cliente;
-                cboServicioBusqueda.Text = ventaAEditar.Servicio;
-                cboEstado.Text = ventaAEditar.Estado;
-                txtPeso.Text = ventaAEditar.Peso.ToString("F2", CultureInfo.CurrentCulture);
-                txtDetalle.Text = ventaAEditar.Detalle.ToString("F2", CultureInfo.CurrentCulture);
-                txtImporteTotal.Text = ventaAEditar.ImporteTotal.ToString("F2", CultureInfo.CurrentCulture);
+                SeleccionarVentaEnGrid(ventaAEditar.Codigo);
+                CargarCamposDesdeVenta(ventaAEditar);
             }
+        }
+
+        private void ConfigurarDataGridView()
+        {
+            dgvActualizar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvActualizar.MultiSelect = false;
+            dgvActualizar.ReadOnly = true;
+            dgvActualizar.AllowUserToAddRows = false;
+            dgvActualizar.AutoGenerateColumns = true;
+        }
+
+        private void CargarGrid()
+        {
+            var lista = VentaDAO.Listar() ?? new System.Collections.Generic.List<Venta>();
+            dgvActualizar.DataSource = null;
+            dgvActualizar.DataSource = lista;
+            if (dgvActualizar.Columns.Count > 1)
+            {
+                for (int i = 0; i < dgvActualizar.Columns.Count; i++)
+                {
+                    var colName = dgvActualizar.Columns[i].Name.ToLowerInvariant();
+                    if (colName.Contains("fecha"))
+                        dgvActualizar.Columns[i].DefaultCellStyle.Format = "dd/MM/yyyy";
+                }
+            }
+        }
+
+        private void DgvActualizar_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvActualizar == null) return;
+            if (dgvActualizar.SelectedRows == null || dgvActualizar.SelectedRows.Count == 0) return;
+
+            var venta = dgvActualizar.SelectedRows[0].DataBoundItem as Venta;
+            if (venta == null) return;
+
+            ventaAEditar = venta;
+            CargarCamposDesdeVenta(venta);
+        }
+
+        private void SeleccionarVentaEnGrid(string codigo)
+        {
+            if (dgvActualizar == null || string.IsNullOrEmpty(codigo)) return;
+            foreach (DataGridViewRow row in dgvActualizar.Rows)
+            {
+                var v = row.DataBoundItem as Venta;
+                if (v != null && v.Codigo == codigo)
+                {
+                    row.Selected = true;
+                    dgvActualizar.CurrentCell = row.Cells[0];
+                    return;
+                }
+            }
+        }
+
+        private void CargarCamposDesdeVenta(Venta venta)
+        {
+            if (venta == null) return;
+
+            txtCodigo.Text = venta.Codigo;
+            dtpFecha.Value = venta.Fecha == default ? DateTime.Now : venta.Fecha;
+            dtpFechaEntrega.Value = venta.FechaEntrega == default ? DateTime.Now : venta.FechaEntrega;
+            txtCliente.Text = venta.Cliente;
+            cboServicioBusqueda.Text = venta.Servicio;
+            cboEstado.Text = venta.Estado;
+            txtPeso.Text = venta.Peso.ToString("F2", CultureInfo.CurrentCulture);
+            txtDetalle.Text = venta.Detalle.ToString("F2", CultureInfo.CurrentCulture);
+            txtImporteTotal.Text = venta.ImporteTotal.ToString("F2", CultureInfo.CurrentCulture);
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -98,6 +172,9 @@ namespace LavaGO.Botones
             ventaAEditar.ImporteTotal = totalValido;
 
             VentaDAO.Actualizar(ventaAEditar);
+
+            // Actualizar grid para reflejar cambios
+            CargarGrid();
 
             MessageBox.Show("El registro se actualizó correctamente.", "LavaGO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;
