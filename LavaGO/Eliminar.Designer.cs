@@ -28,39 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.dgvEliminar = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEliminar)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnEliminar
             // 
-            this.button1.Location = new System.Drawing.Point(1383, 393);
-            this.button1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(275, 138);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "ELIMINAR";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEliminar.Location = new System.Drawing.Point(593, 176);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(118, 62);
+            this.btnEliminar.TabIndex = 1;
+            this.btnEliminar.Text = "ELIMINAR";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
             // 
             // dgvEliminar
             // 
             this.dgvEliminar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEliminar.Location = new System.Drawing.Point(56, 47);
-            this.dgvEliminar.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dgvEliminar.Location = new System.Drawing.Point(24, 21);
             this.dgvEliminar.Name = "dgvEliminar";
             this.dgvEliminar.RowHeadersWidth = 92;
-            this.dgvEliminar.Size = new System.Drawing.Size(1253, 812);
+            this.dgvEliminar.Size = new System.Drawing.Size(537, 364);
             this.dgvEliminar.TabIndex = 26;
             // 
             // Eliminar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1732, 909);
+            this.ClientSize = new System.Drawing.Size(742, 407);
             this.Controls.Add(this.dgvEliminar);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Controls.Add(this.btnEliminar);
             this.Name = "Eliminar";
             this.Text = "Eliminar";
             ((System.ComponentModel.ISupportInitialize)(this.dgvEliminar)).EndInit();
@@ -69,7 +67,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvEliminar;
     }
 }

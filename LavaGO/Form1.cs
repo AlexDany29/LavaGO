@@ -13,9 +13,7 @@ namespace LavaGO
             InitializeComponent();
 
             this.eliminarToolStripMenuItem.Click += eliminarToolStripMenuItem_Click;
-
             this.actualizarToolStripMenuItem.Click += actualizarToolStripMenuItem_Click;
-
             this.MnuListos.Click += listoParaEntregarToolStripMenuItem_Click;
         }
 
@@ -98,20 +96,11 @@ namespace LavaGO
         {
             new Buscar().ShowDialog();
         }
-        private void eliminarToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dlg = new Eliminar()) 
+            using (var dlg = new Eliminar())
             {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    foreach (Form f in Application.OpenForms)
-                    {
-                        if (f is Inicio inicio)
-                        {
-                            inicio.MostrarDatos();
-                        }
-                    }
-                }
+                dlg.ShowDialog();
             }
         }
 

@@ -10,7 +10,7 @@ namespace LavaGO
         {
             InitializeComponent();
             this.Load += Eliminar_Load;
-            this.button1.Click += btnEliminar_Click;
+            this.btnEliminar.Click += btnEliminar_Click;
         }
         private void Eliminar_Load(object sender, EventArgs e)
         {
@@ -75,6 +75,11 @@ namespace LavaGO
         {
             this.DialogResult = DialogResult.Cancel; // ← Establece el resultado
             this.Close();
+        }
+
+        private void btnEliminar_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
