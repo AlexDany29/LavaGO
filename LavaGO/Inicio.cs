@@ -1,12 +1,7 @@
-﻿using LavaGO.Clase;
+﻿using LavaGO.Botones;
+using LavaGO.Clase;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace LavaGO
@@ -17,97 +12,134 @@ namespace LavaGO
         {
             InitializeComponent();
 
-            this.Load += Form1_Load;
-            dgvCliente.CellClick += dgvCliente_CellClick;
-            cboServicioBusqueda.SelectedIndexChanged += cboServicioBusqueda_SelectedIndexChanged;
-            txtPeso.TextChanged += txtPeso_TextChanged;
-            txtPeso.KeyPress += txtPeso_KeyPress;
-            txtPeso.Leave += txtPeso_Leave;
+            this.Load += Inicio_Load;
+            this.Activated += Inicio_Activated;
+
+            // Inicializar los items de los ComboBox para que puedan mostrar el Estado/Servicio
+            InicializarCombos();
+
+            // Suscribir el evento de selección del DataGridView
+            this.dgvCliente.SelectionChanged += DgvCliente_SelectionChanged;
         }
 
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            MostrarDatos();
+        }
 
+        private void Inicio_Activated(object sender, EventArgs e)
+        {
+            MostrarDatos();
+        }
+
+        private void InicializarCombos()
+        {
+            cboServicioBusqueda.Items.Clear();
+            cboServicioBusqueda.Items.AddRange(new string[] { "Por peso", "Prendas delicadas" });
+            cboServicioBusqueda.Enabled = false;
+
+            cboEstado.Items.Clear();
+            cboEstado.Items.AddRange(new string[] { "Pendiente", "En proceso", "Entregado" });
+            cboEstado.Enabled = false;
+        }
 
         public void MostrarDatos()
         {
             dgvCliente.DataSource = null;
             dgvCliente.DataSource = VentaDAO.Listar();
+
             if (dgvCliente.Columns.Count > 8)
             {
-                dgvCliente.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy";
-                dgvCliente.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dgvCliente.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy"; // Fecha
+                dgvCliente.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy"; // FechaEntrega
             }
-        }
-        public void Limpiar()
-        {
-            txtCliente.Clear();
-            txtPeso.Clear();
-            txtDetalle.Clear();
-            txtImporteTotal.Clear();
-            cboServicioBusqueda.SelectedIndex = 0;
-            cboEstado.SelectedIndex = 0;
-            dtpFecha.Value = DateTime.Now;
-            dtpFechaEntrega.Value = DateTime.Now.AddDays(2);
 
-            txtCodigo.Text = VentaDAO.GenerarCodigo();
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            cboServicioBusqueda.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboServicioBusqueda.Items.Clear();
-            cboServicioBusqueda.Items.AddRange(new string[] { "Por peso", "Prendas delicadas" });
-            cboServicioBusqueda.SelectedIndex = 0;
-
-            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboEstado.Items.Clear();
-            cboEstado.Items.AddRange(new string[] { "Lavado", "Secado", "Listo para entregar" });
-            cboEstado.SelectedIndex = 0;
-
-            MostrarDatos();
-            Limpiar();
-        }
-        private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvCliente.CurrentRow == null) return;
-
-            Venta v = (Venta)dgvCliente.CurrentRow.DataBoundItem;
-            if (v != null)
+            // Seleccionar la primera fila por defecto (si existe) para mostrar datos en los recuadros
+            if (dgvCliente.Rows.Count > 0)
             {
-                txtCodigo.Text = v.Codigo;
-                dtpFecha.Value = v.Fecha;
-                txtCliente.Text = v.Cliente;
-                cboServicioBusqueda.Text = v.Servicio;
-                txtPeso.Text = v.Peso.ToString("0.00");
-                txtDetalle.Text = v.Detalle.ToString("0.00");
-                txtImporteTotal.Text = v.ImporteTotal.ToString("0.00");
-                cboEstado.Text = v.Estado;
-                dtpFechaEntrega.Value = v.FechaEntrega;
+                dgvCliente.ClearSelection();
+                dgvCliente.Rows[0].Selected = true;
+                ActualizarCamposDesdeSeleccion();
+            }
+            else
+            {
+                LimpiarCampos();
             }
         }
-        private void cboServicioBusqueda_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void DgvCliente_SelectionChanged(object sender, EventArgs e)
         {
-            if (cboServicioBusqueda.Text == "Por peso") txtDetalle.Text = "5.00";
-            else if (cboServicioBusqueda.Text == "Prendas delicadas") txtDetalle.Text = "7.50";
-            CalcularImporte();
-        }
-        private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.') e.Handled = true;
-            if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains(".")) e.Handled = true;
+            ActualizarCamposDesdeSeleccion();
         }
 
-        private void txtPeso_TextChanged(object sender, EventArgs e) => CalcularImporte();
-
-        private void txtPeso_Leave(object sender, EventArgs e)
+        private void ActualizarCamposDesdeSeleccion()
         {
-            if (decimal.TryParse(txtPeso.Text, out decimal peso)) txtPeso.Text = peso.ToString("0.00");
+            if (dgvCliente == null || dgvCliente.SelectedRows == null || dgvCliente.SelectedRows.Count == 0)
+            {
+                LimpiarCampos();
+                return;
+            }
+
+            var venta = dgvCliente.SelectedRows[0].DataBoundItem as Venta;
+            if (venta == null)
+            {
+                LimpiarCampos();
+                return;
+            }
+
+            // Rellenar controles (usar la cultura actual para formato numérico)
+            txtCodigo.Text = venta.Codigo ?? string.Empty;
+            dtpFecha.Value = venta.Fecha == default ? DateTime.Now : venta.Fecha;
+            txtCliente.Text = venta.Cliente ?? string.Empty;
+            SetComboValue(cboServicioBusqueda, venta.Servicio);
+            txtPeso.Text = venta.Peso.ToString("F2", CultureInfo.CurrentCulture);
+            txtDetalle.Text = venta.Detalle.ToString("F2", CultureInfo.CurrentCulture);
+            txtImporteTotal.Text = venta.ImporteTotal.ToString("F2", CultureInfo.CurrentCulture);
+            SetComboValue(cboEstado, venta.Estado);
+            dtpFechaEntrega.Value = venta.FechaEntrega == default ? DateTime.Now : venta.FechaEntrega;
         }
 
-        private void CalcularImporte()
+        private void SetComboValue(ComboBox combo, string value)
         {
-            decimal.TryParse(txtPeso.Text, out decimal peso);
-            decimal.TryParse(txtDetalle.Text, out decimal precio);
-            txtImporteTotal.Text = (peso * precio).ToString("0.00");
+            if (combo == null) return;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                combo.SelectedIndex = -1;
+                return;
+            }
+
+            // Si el valor ya existe lo seleccionamos, si no lo añadimos temporalmente para que se muestre
+            if (combo.Items.Contains(value))
+            {
+                combo.SelectedItem = value;
+            }
+            else
+            {
+                combo.Items.Add(value);
+                combo.SelectedItem = value;
+            }
         }
-        
+
+        private void LimpiarCampos()
+        {
+            txtCodigo.Text = string.Empty;
+            dtpFecha.Value = DateTime.Now;
+            txtCliente.Text = string.Empty;
+            cboServicioBusqueda.SelectedIndex = -1;
+            txtPeso.Text = string.Empty;
+            txtDetalle.Text = string.Empty;
+            txtImporteTotal.Text = string.Empty;
+            cboEstado.SelectedIndex = -1;
+            dtpFechaEntrega.Value = DateTime.Now;
+        }
+
+        // Método auxiliar público (mantengo compatibilidad con usos previos)
+        public Venta ObtenerVentaSeleccionada()
+        {
+            if (dgvCliente == null) return null;
+            if (dgvCliente.SelectedRows == null || dgvCliente.SelectedRows.Count == 0) return null;
+            return dgvCliente.SelectedRows[0].DataBoundItem as Venta;
+        }
     }
 }

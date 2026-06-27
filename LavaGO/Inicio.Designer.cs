@@ -72,8 +72,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(28, 27);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupBox1.Location = new System.Drawing.Point(78, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.groupBox1.Size = new System.Drawing.Size(884, 513);
@@ -264,14 +263,14 @@
             this.dgvCliente.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.dgvCliente.Name = "dgvCliente";
             this.dgvCliente.RowHeadersWidth = 92;
-            this.dgvCliente.Size = new System.Drawing.Size(884, 297);
+            this.dgvCliente.Size = new System.Drawing.Size(537, 364);
             this.dgvCliente.TabIndex = 25;
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 1004);
+            this.ClientSize = new System.Drawing.Size(561, 648);
             this.Controls.Add(this.dgvCliente);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
