@@ -127,9 +127,11 @@ namespace LavaGO
             }
         }
 
-        private void informaci(object sender, EventArgs e)
+        
+        private void horarioDeAtencionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormHorario frm = new FormHorario();
+            frm.ShowDialog();
         }
     }
 }
