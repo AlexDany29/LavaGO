@@ -17,6 +17,9 @@ namespace LavaGO
             InitializeComponent();
             btnIngresar.Click += btnIngresar_Click;
             txtPassword.PasswordChar = '*';
+            // Al presionar Enter se ejecuta el botón Ingresar
+            this.AcceptButton = btnIngresar;
+            txtUsuario.Focus();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
