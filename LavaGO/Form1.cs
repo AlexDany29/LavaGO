@@ -129,6 +129,16 @@ namespace LavaGO
             ListosEntregar ventana = new ListosEntregar();
             ventana.Show();
         }
+        private void historiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormHistoria frm = new FormHistoria();
+            frm.ShowDialog();
+        }
 
+        private void horarioDeAtencionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormHorario frm = new FormHorario();
+            frm.ShowDialog();
+        }
     }
 }
