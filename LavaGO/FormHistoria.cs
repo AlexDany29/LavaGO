@@ -15,6 +15,12 @@ namespace LavaGO
         public FormHistoria()
         {
             InitializeComponent();
+            btnCerrar.Click += btnCerrar_Click;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -15,7 +15,8 @@ namespace LavaGO
         public FormHorario()
         {
             InitializeComponent();
-            
+            btnCerrar.Click += btnCerrar_Click;
+
         }
             private void btnCerrar_Click(object sender, EventArgs e)
         {

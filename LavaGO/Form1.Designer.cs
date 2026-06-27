@@ -59,7 +59,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(677, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(677, 28);
             this.menuStrip1.TabIndex = 33;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,7 +68,7 @@
             this.menúToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inicioToolStripMenuItem});
             this.menúToolStripMenuItem.Name = "menúToolStripMenuItem";
-            this.menúToolStripMenuItem.Size = new System.Drawing.Size(60, 26);
+            this.menúToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.menúToolStripMenuItem.Text = "Menú";
             // 
             // inicioToolStripMenuItem
@@ -86,7 +86,7 @@
             this.eliminarToolStripMenuItem,
             this.buscarToolStripMenuItem});
             this.funcionesToolStripMenuItem.Name = "funcionesToolStripMenuItem";
-            this.funcionesToolStripMenuItem.Size = new System.Drawing.Size(88, 26);
+            this.funcionesToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.funcionesToolStripMenuItem.Text = "Funciones";
             // 
             // agregarToolStripMenuItem
@@ -122,7 +122,7 @@
             this.precioServiciosToolStripMenuItem,
             this.reporteVentasToolStripMenuItem});
             this.informaciónToolStripMenuItem.Name = "informaciónToolStripMenuItem";
-            this.informaciónToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.informaciónToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
             this.informaciónToolStripMenuItem.Text = "Mas información";
             // 
             // precioServiciosToolStripMenuItem
@@ -148,7 +148,7 @@
             this.horarioDeAtenciónToolStripMenuItem,
             this.redesSocialesToolStripMenuItem});
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
             this.informacionToolStripMenuItem.Text = "Quienes Somos";
             // 
             // historiaToolStripMenuItem
@@ -156,6 +156,7 @@
             this.historiaToolStripMenuItem.Name = "historiaToolStripMenuItem";
             this.historiaToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.historiaToolStripMenuItem.Text = "Historia";
+            this.historiaToolStripMenuItem.Click += new System.EventHandler(this.historiaToolStripMenuItem_Click);
             // 
             // misiónToolStripMenuItem
             // 
