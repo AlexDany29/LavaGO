@@ -267,7 +267,7 @@
             this.ClientSize = new System.Drawing.Size(1319, 565);
             this.Controls.Add(this.groupBox2);
             this.Name = "BotonAgregar";
-            this.Text = "BotonAgregar";
+            this.Text = "Agregar";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
