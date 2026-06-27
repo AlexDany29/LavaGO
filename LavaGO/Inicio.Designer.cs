@@ -72,7 +72,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(78, 23);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(379, 230);
             this.groupBox1.TabIndex = 24;
@@ -243,14 +243,14 @@
             this.dgvCliente.Location = new System.Drawing.Point(12, 272);
             this.dgvCliente.Name = "dgvCliente";
             this.dgvCliente.RowHeadersWidth = 92;
-            this.dgvCliente.Size = new System.Drawing.Size(379, 133);
+            this.dgvCliente.Size = new System.Drawing.Size(537, 364);
             this.dgvCliente.TabIndex = 25;
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 450);
+            this.ClientSize = new System.Drawing.Size(561, 648);
             this.Controls.Add(this.dgvCliente);
             this.Controls.Add(this.groupBox1);
             this.Name = "Inicio";

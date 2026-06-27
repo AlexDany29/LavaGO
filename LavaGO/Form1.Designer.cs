@@ -40,6 +40,11 @@
             this.precioServiciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reporteVentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.misiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.visiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.horarioDeAtenciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redesSocialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +74,7 @@
             // 
             this.inicioToolStripMenuItem.Name = "inicioToolStripMenuItem";
             this.inicioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.inicioToolStripMenuItem.Text = "Inicio";
+            this.inicioToolStripMenuItem.Text = "Ventas";
             this.inicioToolStripMenuItem.Click += new System.EventHandler(this.inicioToolStripMenuItem_Click);
             // 
             // funcionesToolStripMenuItem
@@ -116,29 +121,65 @@
             this.precioServiciosToolStripMenuItem,
             this.reporteVentasToolStripMenuItem});
             this.informaciónToolStripMenuItem.Name = "informaciónToolStripMenuItem";
-            this.informaciónToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.informaciónToolStripMenuItem.Text = "Registros";
+            this.informaciónToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.informaciónToolStripMenuItem.Text = "Mas información";
             // 
             // precioServiciosToolStripMenuItem
             // 
             this.precioServiciosToolStripMenuItem.Name = "precioServiciosToolStripMenuItem";
-            this.precioServiciosToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.precioServiciosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.precioServiciosToolStripMenuItem.Text = "Precio Servicios";
             this.precioServiciosToolStripMenuItem.Click += new System.EventHandler(this.precioServiciosToolStripMenuItem_Click);
             // 
             // reporteVentasToolStripMenuItem
             // 
             this.reporteVentasToolStripMenuItem.Name = "reporteVentasToolStripMenuItem";
-            this.reporteVentasToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.reporteVentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reporteVentasToolStripMenuItem.Text = "Reporte Ventas";
             this.reporteVentasToolStripMenuItem.Click += new System.EventHandler(this.reporteVentasToolStripMenuItem_Click);
             // 
             // informacionToolStripMenuItem
             // 
+            this.informacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.historiaToolStripMenuItem,
+            this.misiónToolStripMenuItem,
+            this.visiónToolStripMenuItem,
+            this.horarioDeAtenciónToolStripMenuItem,
+            this.redesSocialesToolStripMenuItem});
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.informacionToolStripMenuItem.Text = "Informacion";
-            this.informacionToolStripMenuItem.Click += new System.EventHandler(this.informacionToolStripMenuItem_Click_1);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.informacionToolStripMenuItem.Text = "Quienes Somos";
+            this.informacionToolStripMenuItem.Click += new System.EventHandler(this.informaci);
+            // 
+            // historiaToolStripMenuItem
+            // 
+            this.historiaToolStripMenuItem.Name = "historiaToolStripMenuItem";
+            this.historiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.historiaToolStripMenuItem.Text = "Historia";
+            // 
+            // misiónToolStripMenuItem
+            // 
+            this.misiónToolStripMenuItem.Name = "misiónToolStripMenuItem";
+            this.misiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.misiónToolStripMenuItem.Text = "Misión";
+            // 
+            // visiónToolStripMenuItem
+            // 
+            this.visiónToolStripMenuItem.Name = "visiónToolStripMenuItem";
+            this.visiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.visiónToolStripMenuItem.Text = "Visión";
+            // 
+            // horarioDeAtenciónToolStripMenuItem
+            // 
+            this.horarioDeAtenciónToolStripMenuItem.Name = "horarioDeAtenciónToolStripMenuItem";
+            this.horarioDeAtenciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.horarioDeAtenciónToolStripMenuItem.Text = "Horario de atención";
+            // 
+            // redesSocialesToolStripMenuItem
+            // 
+            this.redesSocialesToolStripMenuItem.Name = "redesSocialesToolStripMenuItem";
+            this.redesSocialesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redesSocialesToolStripMenuItem.Text = "Redes Sociales";
             // 
             // Form1
             // 
@@ -170,6 +211,11 @@
         private System.Windows.Forms.ToolStripMenuItem precioServiciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reporteVentasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem historiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem misiónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem visiónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem horarioDeAtenciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redesSocialesToolStripMenuItem;
     }
 }
 

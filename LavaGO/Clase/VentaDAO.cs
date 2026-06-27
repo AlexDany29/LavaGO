@@ -1,47 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace LavaGO.Clase
 {
     public class VentaDAO
     {
-        // Método que reemplaza la conexión a BD por una generación local
+        private static List<Venta> listaVentas = new List<Venta>();
+        private static readonly object _lock = new object();
+
         public static List<Venta> Listar()
         {
-            List<Venta> lista = new List<Venta>();
-            Random rnd = new Random();
-
-            string[] servicios = { "Por peso", "Prendas delicadas" };
-            string[] estados = { "Lavado", "Secado", "Listo para entregar" };
-            string[] clientes = { "Juan Perez", "Maria Lopez", "Carlos Ruiz", "Ana Gomez", "Luis Torres" };
-
-            for (int i = 1; i <= 100; i++)
+            lock (_lock)
             {
-                decimal peso = (decimal)(rnd.Next(1, 20) + rnd.NextDouble());
-                decimal precio = (i % 2 == 0) ? 5.00m : 7.50m;
-
-                lista.Add(new Venta
-                {
-                    Codigo = "V-" + i.ToString("D3"),
-                    Fecha = DateTime.Now.AddDays(-rnd.Next(0, 30)),
-                    Cliente = clientes[rnd.Next(clientes.Length)],
-                    Servicio = servicios[rnd.Next(servicios.Length)],
-                    Peso = Math.Round(peso, 2),
-                    Detalle = precio,
-                    ImporteTotal = Math.Round(peso * precio, 2),
-                    Estado = estados[rnd.Next(estados.Length)],
-                    FechaEntrega = DateTime.Now.AddDays(rnd.Next(1, 5))
-                });
+                return listaVentas;
             }
-
-            return lista;
         }
 
-        // Métodos vacíos o simplificados para evitar errores de compilación
-        public static void Insertar(Venta v) { /* Simulación: no hace nada */ }
-        public static void Actualizar(Venta v) { /* Simulación: no hace nada */ }
-        public static void Eliminar(string codigo) { /* Simulación: no hace nada */ }
-        public static string GenerarCodigo() { return "V-101"; }
-        public static List<Venta> Ultimas3Ventas() { return Listar().GetRange(0, 3); }
+        public static void Insertar(Venta v)
+        {
+            if (v == null) return;
+            lock (_lock)
+            {
+                listaVentas.Add(v);
+            }
+        }
+
+        public static int ObtenerSiguienteCodigo()
+        {
+            lock (_lock)
+            {
+                if (listaVentas == null || listaVentas.Count == 0) return 1;
+
+                int maxNumero = 0;
+                foreach (var v in listaVentas)
+                {
+                    if (string.IsNullOrEmpty(v?.Codigo)) continue;
+                    string[] partes = v.Codigo.Split('-');
+                    if (partes.Length > 1 && int.TryParse(partes[1], out int numero))
+                    {
+                        if (numero > maxNumero) maxNumero = numero;
+                    }
+                }
+                return maxNumero + 1;
+            }
+        }
+
+        public static void Actualizar(Venta v)
+        {
+            if (v == null) return;
+            lock (_lock)
+            {
+                var existente = listaVentas.FirstOrDefault(x => x.Codigo == v.Codigo);
+                if (existente != null)
+                {
+                    existente.Fecha = v.Fecha;
+                    existente.FechaEntrega = v.FechaEntrega;
+                    existente.Cliente = v.Cliente;
+                    existente.Servicio = v.Servicio;
+                    existente.Peso = v.Peso;
+                    existente.Detalle = v.Detalle;
+                    existente.ImporteTotal = v.ImporteTotal;
+                    existente.Estado = v.Estado;
+                }
+            }
+        }
+
+        // Nuevo: elimina la venta por código. Devuelve true si eliminó algo.
+        public static bool Eliminar(string codigo)
+        {
+            if (string.IsNullOrEmpty(codigo)) return false;
+            lock (_lock)
+            {
+                var existente = listaVentas.FirstOrDefault(x => x.Codigo == codigo);
+                if (existente != null)
+                {
+                    return listaVentas.Remove(existente);
+                }
+                return false;
+            }
+        }
     }
 }
