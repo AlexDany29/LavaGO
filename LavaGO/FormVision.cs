@@ -15,6 +15,12 @@ namespace LavaGO
         public FormVision()
         {
             InitializeComponent();
+            btnCerrar.Click += btnCerrar_Click;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

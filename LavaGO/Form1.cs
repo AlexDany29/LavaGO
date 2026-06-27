@@ -146,5 +146,17 @@ namespace LavaGO
             FormMision frm = new FormMision();
             frm.ShowDialog();
         }
+
+        private void visiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormVision frm = new FormVision();
+            frm.ShowDialog();
+        }
+
+        private void redesSocialesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRedes frm = new FormRedes();
+            frm.ShowDialog();
+        }
     }
 }

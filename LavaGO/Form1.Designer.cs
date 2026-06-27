@@ -60,7 +60,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(677, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(677, 30);
             this.menuStrip1.TabIndex = 33;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -157,7 +157,7 @@
             this.horarioDeAtenciónToolStripMenuItem,
             this.redesSocialesToolStripMenuItem});
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.informacionToolStripMenuItem.Text = "Quienes Somos";
             // 
             // historiaToolStripMenuItem
@@ -179,6 +179,7 @@
             this.visiónToolStripMenuItem.Name = "visiónToolStripMenuItem";
             this.visiónToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.visiónToolStripMenuItem.Text = "Visión";
+            this.visiónToolStripMenuItem.Click += new System.EventHandler(this.visiónToolStripMenuItem_Click);
             // 
             // horarioDeAtenciónToolStripMenuItem
             // 
@@ -192,6 +193,7 @@
             this.redesSocialesToolStripMenuItem.Name = "redesSocialesToolStripMenuItem";
             this.redesSocialesToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.redesSocialesToolStripMenuItem.Text = "Redes Sociales";
+            this.redesSocialesToolStripMenuItem.Click += new System.EventHandler(this.redesSocialesToolStripMenuItem_Click);
             // 
             // Form1
             // 
