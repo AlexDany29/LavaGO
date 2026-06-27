@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace LavaGO
 {
-    public partial class FormMenus : Form
+    public partial class Inicio : Form
     {
-        public FormMenus()
+        public Inicio()
         {
             InitializeComponent();
         }
