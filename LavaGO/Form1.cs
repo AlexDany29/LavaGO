@@ -24,35 +24,9 @@ namespace LavaGO
             txtPeso.TextChanged += txtPeso_TextChanged;
             txtPeso.KeyPress += txtPeso_KeyPress;
             txtPeso.Leave += txtPeso_Leave;
-            btnIngresarBusqueda.Click += btnIngresarBusqueda_Click;
         }
 
-        private void btnIngresarBusqueda_Click(object sender, EventArgs e)
-        {
-            string criterio = txtBusqueda.Text.Trim().ToLower();
-
-            if (string.IsNullOrEmpty(criterio))
-            {
-                MessageBox.Show("Por favor, ingrese un término para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var listaCompleta = VentaDAO.Listar();
-
-            var resultados = listaCompleta.Where(v =>
-                (cboOpciones.SelectedItem?.ToString() == "Código" && v.Codigo.ToString().ToLower().Contains(criterio)) ||
-                (cboOpciones.SelectedItem?.ToString() == "Cliente" && v.Cliente.ToLower().Contains(criterio)) ||
-                (cboOpciones.SelectedIndex == -1 && v.Cliente.ToLower().Contains(criterio))
-            ).ToList();
-
-            dgvBusqueda.DataSource = null;
-            dgvBusqueda.DataSource = resultados;
-
-            if (resultados.Count == 0)
-            {
-                MessageBox.Show("No se encontraron registros que coincidan con la búsqueda.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        
 
         public void MostrarDatos()
         {
@@ -95,7 +69,7 @@ namespace LavaGO
             cboOpciones.DropDownStyle = ComboBoxStyle.DropDownList; 
             cboOpciones.Items.Clear();
             cboOpciones.Items.AddRange(new string[] { "Código", "Cliente" }); 
-            cboOpciones.SelectedIndex = 0; 
+            cboOpciones.SelectedIndex = 0;
         }
         private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -201,6 +175,87 @@ namespace LavaGO
         }
 
         private void cboEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    Inicio ventanaInicio = new Inicio();[cite: 2]
+    ventanaInicio.ShowDialog();
+}
+
+        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LavaGO.Botones.BotonAgregar ventanaAgregar = new LavaGO.Botones.BotonAgregar();
+            ventanaAgregar.ShowDialog();
+
+            MostrarDatos();
+            Limpiar();
+        }
+
+        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormInformacion ventanaInfo = new FormInformacion();
+            ventanaInfo.ShowDialog();
+        }
+
+        private void actualizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCliente.CurrentRow == null)
+            {
+                MessageBox.Show("Por favor, seleccione una fila de la tabla para modificar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Venta ventaSeleccionada = (Venta)dgvCliente.CurrentRow.DataBoundItem;
+
+            LavaGO.Botones.BotonActualizar ventanaActualizar = new LavaGO.Botones.BotonActualizar(ventaSeleccionada);
+            ventanaActualizar.ShowDialog();
+
+            MostrarDatos();
+            Limpiar();
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCliente.CurrentRow == null) return;
+
+            Venta sel = (Venta)dgvCliente.CurrentRow.DataBoundItem;
+            DialogResult res = MessageBox.Show($"¿Desea eliminar la venta {sel.Codigo}?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                VentaDAO.Eliminar(sel.Codigo);
+                MostrarDatos();
+                Limpiar();
+            }
+        }
+
+        private void precioServiciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Por peso: S/. 5.00\nPrendas delicadas: S/. 7.50", "Tarifario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void reporteVentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string reporte = "REPORTE DE LAS 3 ÚLTIMAS VENTAS LAVAGO\n\n";
+            var lista = VentaDAO.Listar();
+            var ultimas = lista.Skip(Math.Max(0, lista.Count - 3)).ToList();
+
+            foreach (var v in ultimas)
+            {
+                reporte += $"Código: {v.Codigo} | Cliente: {v.Cliente} | Total: S/. {v.ImporteTotal:0.00}\n";
+            }
+            MessageBox.Show(reporte, "Reportes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Buscar ventanaBuscar = new Buscar();
+            ventanaBuscar.ShowDialog();
+        }
+
+        private void cboOpciones_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
