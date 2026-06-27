@@ -15,7 +15,6 @@ namespace LavaGO
             this.button1.Click += btnEliminar_Click;
             this.button2.Click += btnRegresar_Click;
         }
-
         private void Eliminar_Load(object sender, EventArgs e)
         {
             ConfigurarDataGridView();
