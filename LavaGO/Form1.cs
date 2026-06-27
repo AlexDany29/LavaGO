@@ -112,11 +112,10 @@ namespace LavaGO
         // Nuevo: manejador para el menú Eliminar.
         private void eliminarToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            using (var dlg = new Eliminar())
+            using (var dlg = new Eliminar()) 
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    // Refrescar cualquier ventana Inicio abierta
                     foreach (Form f in Application.OpenForms)
                     {
                         if (f is Inicio inicio)
@@ -128,9 +127,17 @@ namespace LavaGO
             }
         }
 
-        private void informaci(object sender, EventArgs e)
+        
+        private void horarioDeAtencionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormHorario frm = new FormHorario();
+            frm.ShowDialog();
+        }
 
+        private void historiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormHistoria frm = new FormHistoria();
+            frm.ShowDialog();
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Drawing;
 using System.Windows.Forms;
 using LavaGO.Clase;
 
@@ -8,115 +6,81 @@ namespace LavaGO
 {
     public partial class Eliminar : Form
     {
-        private ComboBox cboVentas;
-        private Button btnEliminar;
-        private Button btnCancelar;
-        private Label lblInfo;
-
         public Eliminar()
         {
-            InitializeComponent();
-            Load += Eliminar_Load;
+            InitializeComponent(); // Llama al diseño de Eliminar.Designer.cs
+            this.Load += Eliminar_Load;
+            
+            // Asignar los eventos a los botones del Diseñador
+            this.button1.Click += btnEliminar_Click;
+            this.button2.Click += btnRegresar_Click;
         }
-
-        private void InitializeComponent()
-        {
-            this.Text = "Eliminar Venta";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.ClientSize = new System.Drawing.Size(420, 140);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-
-            lblInfo = new Label()
-            {
-                Text = "Seleccione el código de la venta a eliminar:",
-                Left = 12,
-                Top = 10,
-                Width = 390
-            };
-
-            cboVentas = new ComboBox()
-            {
-                Left = 12,
-                Top = 35,
-                Width = 390,
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-
-            btnEliminar = new Button()
-            {
-                Text = "Eliminar",
-                Left = 220,
-                Top = 75,
-                Width = 90,
-                DialogResult = DialogResult.None
-            };
-            btnEliminar.Click += BtnEliminar_Click;
-
-            btnCancelar = new Button()
-            {
-                Text = "Cancelar",
-                Left = 322,
-                Top = 75,
-                Width = 80,
-                DialogResult = DialogResult.Cancel
-            };
-            btnCancelar.Click += (s, e) => this.Close();
-
-            this.Controls.Add(lblInfo);
-            this.Controls.Add(cboVentas);
-            this.Controls.Add(btnEliminar);
-            this.Controls.Add(btnCancelar);
-        }
-
         private void Eliminar_Load(object sender, EventArgs e)
         {
-            CargarListaVentas();
+            ConfigurarDataGridView();
+            CargarDatos();
         }
 
-        private void CargarListaVentas()
+        private void ConfigurarDataGridView()
         {
-            cboVentas.Items.Clear();
-            var lista = VentaDAO.Listar();
-            if (lista == null || lista.Count == 0)
+            if (dgvEliminar == null) return;
+
+            dgvEliminar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEliminar.MultiSelect = false;
+            dgvEliminar.ReadOnly = true;
+            dgvEliminar.AllowUserToAddRows = false;
+        }
+
+        private void CargarDatos()
+        {
+            if (dgvEliminar == null) return;
+
+            dgvEliminar.DataSource = null;
+            dgvEliminar.DataSource = VentaDAO.Listar(); // Obtiene la lista global de ventas
+            dgvEliminar.Refresh();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvEliminar == null) return;
+
+            // Verificar si hay una fila seleccionada
+            if (dgvEliminar.CurrentRow == null)
             {
-                cboVentas.Items.Add("<No hay ventas>");
-                cboVentas.SelectedIndex = 0;
-                cboVentas.Enabled = false;
-                btnEliminar.Enabled = false;
+                MessageBox.Show("Por favor, seleccione una fila de la tabla para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            foreach (var v in lista)
+            // Obtener el objeto Venta seleccionado
+            Venta ventaSeleccionada = dgvEliminar.CurrentRow.DataBoundItem as Venta;
+            if (ventaSeleccionada == null)
             {
-                cboVentas.Items.Add(v.Codigo);
+                MessageBox.Show("No se pudo obtener el registro seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            if (cboVentas.Items.Count > 0) cboVentas.SelectedIndex = 0;
+            // Confirmación antes de eliminar
+            DialogResult res = MessageBox.Show($"¿Está seguro que desea eliminar la venta con código {ventaSeleccionada.Codigo}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (res == DialogResult.Yes)
+            {
+                bool eliminado = VentaDAO.Eliminar(ventaSeleccionada.Codigo);
+                if (eliminado)
+                {
+                    MessageBox.Show("Registro eliminado con éxito.", "LavaGO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarDatos(); // Refresca la tabla local
+                    this.DialogResult = DialogResult.OK; // Notifica que hubo cambios
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo eliminar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
-        private void BtnEliminar_Click(object sender, EventArgs e)
+        private void btnRegresar_Click(object sender, EventArgs e)
         {
-            if (cboVentas.SelectedItem == null) return;
-            string codigo = cboVentas.SelectedItem.ToString();
-            if (string.IsNullOrEmpty(codigo)) return;
-
-            var confirm = MessageBox.Show($"¿Eliminar la venta con código {codigo}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirm != DialogResult.Yes) return;
-
-            bool eliminado = VentaDAO.Eliminar(codigo);
-            if (eliminado)
-            {
-                MessageBox.Show("Venta eliminada correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("No se pudo eliminar la venta (no encontrada).", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                CargarListaVentas();
-            }
+            this.Close(); // Cierra la ventana actual
         }
     }
 }
