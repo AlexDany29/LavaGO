@@ -58,7 +58,12 @@ namespace LavaGO
                 return;
             }
 
-            var ultimas = lista.OrderByDescending(v => v.Fecha).Take(3).ToList();
+            var ultimas = lista
+                .OrderByDescending(v => v.Fecha)
+                .ThenByDescending(v => v.Codigo)
+                .Take(3)
+                .ToList();
+
             string reporte = "REPORTE DE LAS 3 ÚLTIMAS VENTAS:\n\n";
 
             foreach (var v in ultimas)
