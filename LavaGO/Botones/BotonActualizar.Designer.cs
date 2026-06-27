@@ -263,7 +263,7 @@
             this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "BotonActualizar";
-            this.Text = "BotonActualizar";
+            this.Text = "Actualizar";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActualizar)).EndInit();
