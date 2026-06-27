@@ -66,7 +66,7 @@ namespace LavaGO.Clase
             }
         }
 
-        // Nuevo: elimina la venta por código. Devuelve true si eliminó algo.
+        // Método para eliminar una venta por código
         public static bool Eliminar(string codigo)
         {
             if (string.IsNullOrEmpty(codigo)) return false;
