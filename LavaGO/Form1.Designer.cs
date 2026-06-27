@@ -46,7 +46,6 @@
             this.visiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horarioDeAtenciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redesSocialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.entregadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,8 +67,7 @@
             // 
             this.menúToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inicioToolStripMenuItem,
-            this.MnuListos,
-            this.entregadosToolStripMenuItem});
+            this.MnuListos});
             this.menúToolStripMenuItem.Name = "menúToolStripMenuItem";
             this.menúToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menúToolStripMenuItem.Text = "Menú";
@@ -190,13 +188,6 @@
             this.redesSocialesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.redesSocialesToolStripMenuItem.Text = "Redes Sociales";
             // 
-            // entregadosToolStripMenuItem
-            // 
-            this.entregadosToolStripMenuItem.Name = "entregadosToolStripMenuItem";
-            this.entregadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.entregadosToolStripMenuItem.Text = "Entregados";
-            
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,7 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem horarioDeAtenciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redesSocialesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MnuListos;
-        private System.Windows.Forms.ToolStripMenuItem entregadosToolStripMenuItem;
     }
 }
 

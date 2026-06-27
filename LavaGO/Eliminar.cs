@@ -82,5 +82,6 @@ namespace LavaGO
         {
             this.Close(); // Cierra la ventana actual
         }
+
     }
 }

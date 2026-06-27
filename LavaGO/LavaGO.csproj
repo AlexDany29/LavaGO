@@ -73,12 +73,6 @@
     <Compile Include="Eliminar.Designer.cs">
       <DependentUpon>Eliminar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entregados.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Entregados.Designer.cs">
-      <DependentUpon>Entregados.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,9 +116,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Eliminar.resx">
       <DependentUpon>Eliminar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Entregados.resx">
-      <DependentUpon>Entregados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
