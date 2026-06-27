@@ -54,7 +54,7 @@ namespace LavaGO
             dtpFecha.Value = DateTime.Now;
             dtpFechaEntrega.Value = DateTime.Now.AddDays(2);
 
-            txtCodigo.Text = "LVG" + (VentaDAO.Listar().Count + 1).ToString("000");
+            txtCodigo.Text = VentaDAO.GenerarCodigo();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -159,13 +159,12 @@ namespace LavaGO
         private void btnReporteVentas_Click(object sender, EventArgs e)
         {
             string reporte = "REPORTE DE LAS 3 ÚLTIMAS VENTAS LAVAGO\n\n";
-            var lista = VentaDAO.Listar();
-            var ultimas = lista.Skip(Math.Max(0, lista.Count - 3)).ToList();
-
+            var ultimas = VentaDAO.Ultimas3Ventas();
             foreach (var v in ultimas)
             {
                 reporte += $"Código: {v.Codigo} | Cliente: {v.Cliente} | Total: S/. {v.ImporteTotal:0.00}\n";
             }
+
             MessageBox.Show(reporte, "Reportes", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

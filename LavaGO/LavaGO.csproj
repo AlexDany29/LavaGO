@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Clase\Venta.cs" />
     <Compile Include="Clase\VentaDAO.cs" />
+    <Compile Include="ConexionBD.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

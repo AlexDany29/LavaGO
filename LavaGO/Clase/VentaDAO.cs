@@ -1,58 +1,151 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace LavaGO.Clase
 {
     public class VentaDAO
     {
-        public static List<Venta> lista = new List<Venta>();
-        static VentaDAO()
+        public static List<Venta> Listar()
         {
-            for (int i = 1; i <= 50; i++)
-            {
-                DateTime fechaRegistro = DateTime.Now.AddDays(-i);
-                string estadoSimulado = "Lavado";
-                if (i % 3 == 0) estadoSimulado = "Secado";
-                else if (i % 3 == 1) estadoSimulado = "Listo para entregar";
+            List<Venta> lista = new List<Venta>();
 
-                lista.Add(new Venta
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_ListarVentas", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
                 {
-                    Codigo = "LVG" + i.ToString("000"),
-                    Fecha = fechaRegistro,
-                    Cliente = "Cliente Simulado " + i,
-                    Servicio = (i % 2 == 0) ? "Por peso" : "Prendas delicadas",
-                    Peso = 3.5m + (i % 5),
-                    Detalle = (i % 2 == 0) ? 5.00m : 7.50m,
-                    ImporteTotal = (3.5m + (i % 5)) * ((i % 2 == 0) ? 5.00m : 7.50m),
-                    Estado = estadoSimulado,
-                    FechaEntrega = fechaRegistro.AddDays(2)
-                });
+                    Venta v = new Venta();
+                    v.Codigo = dr["Codigo"].ToString();
+                    v.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                    v.Cliente = dr["Cliente"].ToString();
+                    v.Servicio = dr["Servicio"].ToString();
+                    v.Peso = Convert.ToDecimal(dr["Peso"]);
+                    v.Detalle = Convert.ToDecimal(dr["Detalle"]);
+                    v.ImporteTotal = Convert.ToDecimal(dr["ImporteTotal"]);
+                    v.Estado = dr["Estado"].ToString();
+                    v.FechaEntrega = Convert.ToDateTime(dr["FechaEntrega"]);
+
+                    lista.Add(v);
+                }
+            }
+
+            return lista;
+        }
+
+        public static void Insertar(Venta v)
+        {
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertarVenta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Codigo", v.Codigo);
+                cmd.Parameters.AddWithValue("@Fecha", v.Fecha);
+                cmd.Parameters.AddWithValue("@Cliente", v.Cliente);
+                cmd.Parameters.AddWithValue("@Servicio", v.Servicio);
+                cmd.Parameters.AddWithValue("@Peso", v.Peso);
+                cmd.Parameters.AddWithValue("@Detalle", v.Detalle);
+                cmd.Parameters.AddWithValue("@ImporteTotal", v.ImporteTotal);
+                cmd.Parameters.AddWithValue("@Estado", v.Estado);
+                cmd.Parameters.AddWithValue("@FechaEntrega", v.FechaEntrega);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
-        public static List<Venta> Listar() => lista;
-        public static void Insertar(Venta v) => lista.Add(v);
+
         public static void Actualizar(Venta v)
         {
-            var item = lista.FirstOrDefault(x => x.Codigo == v.Codigo);
-            if (item != null)
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
             {
-                item.Fecha = v.Fecha;
-                item.Cliente = v.Cliente;
-                item.Servicio = v.Servicio;
-                item.Peso = v.Peso;
-                item.Detalle = v.Detalle;
-                item.ImporteTotal = v.ImporteTotal;
-                item.Estado = v.Estado;
-                item.FechaEntrega = v.FechaEntrega;
+                SqlCommand cmd = new SqlCommand("SP_ActualizarVenta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Codigo", v.Codigo);
+                cmd.Parameters.AddWithValue("@Fecha", v.Fecha);
+                cmd.Parameters.AddWithValue("@Cliente", v.Cliente);
+                cmd.Parameters.AddWithValue("@Servicio", v.Servicio);
+                cmd.Parameters.AddWithValue("@Peso", v.Peso);
+                cmd.Parameters.AddWithValue("@Detalle", v.Detalle);
+                cmd.Parameters.AddWithValue("@ImporteTotal", v.ImporteTotal);
+                cmd.Parameters.AddWithValue("@Estado", v.Estado);
+                cmd.Parameters.AddWithValue("@FechaEntrega", v.FechaEntrega);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
+
         public static void Eliminar(string codigo)
         {
-            var item = lista.FirstOrDefault(x => x.Codigo == codigo);
-            if (item != null) lista.Remove(item);
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_EliminarVenta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Codigo", codigo);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static string GenerarCodigo()
+        {
+            string codigo = "";
+
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_GenerarCodigoVenta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                codigo = cmd.ExecuteScalar().ToString();
+            }
+
+            return codigo;
+        }
+
+        public static List<Venta> Ultimas3Ventas()
+        {
+            List<Venta> lista = new List<Venta>();
+
+            using (SqlConnection cn = ConexionBD.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_Ultimas3Ventas", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Venta v = new Venta();
+                    v.Codigo = dr["Codigo"].ToString();
+                    v.Fecha = Convert.ToDateTime(dr["Fecha"]);
+                    v.Cliente = dr["Cliente"].ToString();
+                    v.Servicio = dr["Servicio"].ToString();
+                    v.Peso = Convert.ToDecimal(dr["Peso"]);
+                    v.Detalle = Convert.ToDecimal(dr["Detalle"]);
+                    v.ImporteTotal = Convert.ToDecimal(dr["ImporteTotal"]);
+                    v.Estado = dr["Estado"].ToString();
+                    v.FechaEntrega = Convert.ToDateTime(dr["FechaEntrega"]);
+
+                    lista.Add(v);
+                }
+            }
+
+            return lista;
         }
     }
 }
