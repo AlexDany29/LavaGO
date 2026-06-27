@@ -158,5 +158,11 @@ namespace LavaGO
             FormRedes frm = new FormRedes();
             frm.ShowDialog();
         }
+
+        private void contactoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormInformacion frm = new FormInformacion();
+            frm.ShowDialog();
+        }
     }
 }

@@ -46,6 +46,7 @@
             this.visiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horarioDeAtenciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redesSocialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contactoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(677, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(677, 28);
             this.menuStrip1.TabIndex = 33;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,9 +156,10 @@
             this.misiónToolStripMenuItem,
             this.visiónToolStripMenuItem,
             this.horarioDeAtenciónToolStripMenuItem,
-            this.redesSocialesToolStripMenuItem});
+            this.redesSocialesToolStripMenuItem,
+            this.contactoToolStripMenuItem});
             this.informacionToolStripMenuItem.Name = "informacionToolStripMenuItem";
-            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.informacionToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
             this.informacionToolStripMenuItem.Text = "Quienes Somos";
             // 
             // historiaToolStripMenuItem
@@ -195,6 +197,13 @@
             this.redesSocialesToolStripMenuItem.Text = "Redes Sociales";
             this.redesSocialesToolStripMenuItem.Click += new System.EventHandler(this.redesSocialesToolStripMenuItem_Click);
             // 
+            // contactoToolStripMenuItem
+            // 
+            this.contactoToolStripMenuItem.Name = "contactoToolStripMenuItem";
+            this.contactoToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.contactoToolStripMenuItem.Text = "Contacto";
+            this.contactoToolStripMenuItem.Click += new System.EventHandler(this.contactoToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ToolStripMenuItem horarioDeAtenciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redesSocialesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MnuListos;
+        private System.Windows.Forms.ToolStripMenuItem contactoToolStripMenuItem;
     }
 }
 
