@@ -65,5 +65,10 @@ namespace LavaGO
             FormInformacion ventanaInfo = new FormInformacion();
             ventanaInfo.ShowDialog();
         }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new BotonEliminar().ShowDialog();
+        }
     }
 }

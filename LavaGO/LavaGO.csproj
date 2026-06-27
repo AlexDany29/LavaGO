@@ -105,6 +105,9 @@
     <EmbeddedResource Include="Botones\BotonAgregar.resx">
       <DependentUpon>BotonAgregar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Botones\BotonEliminar.resx">
+      <DependentUpon>BotonEliminar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Buscar.resx">
       <DependentUpon>Buscar.cs</DependentUpon>
     </EmbeddedResource>

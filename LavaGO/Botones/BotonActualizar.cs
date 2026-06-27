@@ -129,5 +129,10 @@ namespace LavaGO.Botones
             MessageBox.Show("El registro se actualizó correctamente.", "LavaGO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        { 
+
+        }
     }   
 }
