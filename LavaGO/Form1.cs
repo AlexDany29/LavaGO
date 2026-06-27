@@ -17,22 +17,43 @@ namespace LavaGO
         public Form1()
         {
             InitializeComponent();
-            // Eventos del formulario y controles principales
+
             this.Load += Form1_Load;
             dgvCliente.CellClick += dgvCliente_CellClick;
             cboServicioBusqueda.SelectedIndexChanged += cboServicioBusqueda_SelectedIndexChanged;
             txtPeso.TextChanged += txtPeso_TextChanged;
             txtPeso.KeyPress += txtPeso_KeyPress;
             txtPeso.Leave += txtPeso_Leave;
-
-            // Redirección de botones a las ventanas emergentes y acciones
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDelete.Click += btnDelete_Click;
-            btnPrecioServicios.Click += btnPrecioServicios_Click;
-            btnReporteVentas.Click += btnReporteVentas_Click;
-            btnMenus.Click += btnMenus_Click;
+            btnIngresarBusqueda.Click += btnIngresarBusqueda_Click;
         }
+
+        private void btnIngresarBusqueda_Click(object sender, EventArgs e)
+        {
+            string criterio = txtBusqueda.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(criterio))
+            {
+                MessageBox.Show("Por favor, ingrese un término para buscar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var listaCompleta = VentaDAO.Listar();
+
+            var resultados = listaCompleta.Where(v =>
+                (cboOpciones.SelectedItem?.ToString() == "Código" && v.Codigo.ToString().ToLower().Contains(criterio)) ||
+                (cboOpciones.SelectedItem?.ToString() == "Cliente" && v.Cliente.ToLower().Contains(criterio)) ||
+                (cboOpciones.SelectedIndex == -1 && v.Cliente.ToLower().Contains(criterio))
+            ).ToList();
+
+            dgvBusqueda.DataSource = null;
+            dgvBusqueda.DataSource = resultados;
+
+            if (resultados.Count == 0)
+            {
+                MessageBox.Show("No se encontraron registros que coincidan con la búsqueda.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         public void MostrarDatos()
         {
             dgvCliente.DataSource = null;
@@ -70,6 +91,11 @@ namespace LavaGO
 
             MostrarDatos();
             Limpiar();
+
+            cboOpciones.DropDownStyle = ComboBoxStyle.DropDownList; 
+            cboOpciones.Items.Clear();
+            cboOpciones.Items.AddRange(new string[] { "Código", "Cliente" }); 
+            cboOpciones.SelectedIndex = 0; 
         }
         private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -174,17 +200,7 @@ namespace LavaGO
             MessageBox.Show("Por peso: S/. 5.00\nPrendas delicadas: S/. 7.50", "Tarifario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectTab(tabPage2);
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectTab(tabPage3);
-        }
-
-        private void btnMenus_Click(object sender, EventArgs e)
+        private void cboEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
