@@ -58,6 +58,12 @@
     <Compile Include="Botones\BotonAgregar.Designer.cs">
       <DependentUpon>BotonAgregar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Botones\BotonEliminar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Botones\BotonEliminar.Designer.cs">
+      <DependentUpon>BotonEliminar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Buscar.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -161,16 +161,6 @@ namespace LavaGO
             MessageBox.Show(reporte, "Reportes", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnPrecioServicios_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Por peso: S/. 5.00\nPrendas delicadas: S/. 7.50", "Tarifario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void cboEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Inicio ventanaInicio = new Inicio();
@@ -186,11 +176,7 @@ namespace LavaGO
             Limpiar();
         }
 
-        private void informacionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormInformacion ventanaInfo = new FormInformacion();
-            ventanaInfo.ShowDialog();
-        }
+ 
 
         private void actualizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -221,17 +207,6 @@ namespace LavaGO
                 MostrarDatos();
                 Limpiar();
             }
-        }
-
-        private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Buscar ventanaBuscar = new Buscar();
-            ventanaBuscar.ShowDialog();
-        }
-
-        private void cboOpciones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
