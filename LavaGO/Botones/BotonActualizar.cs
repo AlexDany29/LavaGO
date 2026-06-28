@@ -38,6 +38,7 @@ namespace LavaGO.Botones
 
         private void BotonActualizar_Load(object sender, EventArgs e)
         {
+            
             cboServicioBusqueda.Items.Clear();
             cboServicioBusqueda.Items.AddRange(new string[] { "Por peso", "Prendas delicadas" });
 
@@ -154,6 +155,18 @@ namespace LavaGO.Botones
             if (!decimal.TryParse(txtImporteTotal.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out decimal totalValido))
             {
                 MessageBox.Show("El campo Importe Total no tiene un formato numérico válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // No permitir actualizar si el estado seleccionado es Entregado
+            if (cboEstado.Text.Trim().Equals("Entregado", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show(
+                    "El servicio ya ha sido entregado, no se puede actualizar.",
+                    "LavaGO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 return;
             }
 
