@@ -12,8 +12,11 @@ namespace LavaGO
             InitializeComponent();
 
             this.Load += ReportedeVentas_Load;
+
             btnFiltrar.Click += btnFiltrar_Click;
             btnMostrarTodo.Click += btnMostrarTodo_Click;
+            btnFiltrarEstado.Click += btnFiltrarEstado_Click;
+            btnLimpiarFiltros.Click += btnLimpiarFiltros_Click;
             btnCerrar.Click += btnCerrar_Click;
         }
 
@@ -21,6 +24,15 @@ namespace LavaGO
         {
             dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
             dtpFechaFin.Value = DateTime.Today;
+
+            cboEstado.Items.Clear();
+            cboEstado.Items.Add("Estado de Servicio");
+            cboEstado.Items.Add("Pendiente");
+            cboEstado.Items.Add("En proceso");
+            cboEstado.Items.Add("Listo para entregar");
+            cboEstado.Items.Add("Entregado");
+            cboEstado.SelectedIndex = 0;
+            cboEstado.DropDownStyle = ComboBoxStyle.DropDownList;
 
             CargarTodasLasVentas();
         }
@@ -37,6 +49,16 @@ namespace LavaGO
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            AplicarFiltros();
+        }
+
+        private void btnFiltrarEstado_Click(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        private void AplicarFiltros()
+        {
             DateTime inicio = dtpFechaInicio.Value.Date;
             DateTime fin = dtpFechaFin.Value.Date;
 
@@ -49,17 +71,34 @@ namespace LavaGO
                 return;
             }
 
-            var ventasFiltradas = VentaDAO.Listar()
-                .Where(v => v.Fecha.Date >= inicio && v.Fecha.Date <= fin)
+            var ventas = VentaDAO.Listar()
+                .Where(v => v.Fecha.Date >= inicio && v.Fecha.Date <= fin);
+
+            if (cboEstado.SelectedItem != null && cboEstado.SelectedItem.ToString() != "Todos")
+            {
+                string estado = cboEstado.SelectedItem.ToString();
+                ventas = ventas.Where(v => v.Estado == estado);
+            }
+
+            var resultado = ventas
                 .OrderByDescending(v => v.Fecha)
                 .ThenByDescending(v => v.Codigo)
                 .ToList();
 
-            MostrarEnGrid(ventasFiltradas);
+            MostrarEnGrid(resultado);
         }
 
         private void btnMostrarTodo_Click(object sender, EventArgs e)
         {
+            CargarTodasLasVentas();
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            dtpFechaInicio.Value = DateTime.Today.AddDays(-30);
+            dtpFechaFin.Value = DateTime.Today;
+            cboEstado.SelectedIndex = 0;
+
             CargarTodasLasVentas();
         }
 
