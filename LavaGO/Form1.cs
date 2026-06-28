@@ -48,38 +48,16 @@ namespace LavaGO
             }
         }
 
-        private void reporteVentasToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void reporteVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var lista = VentaDAO.Listar();
-
-            if (lista == null || lista.Count == 0)
-            {
-                MessageBox.Show("No hay ventas registradas para generar el reporte.", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            var ultimas = lista
-                .OrderByDescending(v => v.Fecha)
-                .ThenByDescending(v => v.Codigo)
-                .Take(3)
-                .ToList();
-
-            string reporte = "REPORTE DE LAS 3 ÚLTIMAS VENTAS:\n\n";
-
-            foreach (var v in ultimas)
-            {
-                reporte += $"Código: {v.Codigo} | Cliente: {v.Cliente} | Total: S/. {v.ImporteTotal:0.00}\n";
-            }
-
-            MessageBox.Show(reporte, "Reporte de Ventas", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ReportedeVentas frm = new ReportedeVentas();
+            frm.ShowDialog();
         }
 
         private void precioServiciosToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("TARIFARIO DE SERVICIOS:\n\n" +
-                            "• Por peso: S/. 5.00\n" +
-                            "• Prendas delicadas: S/. 7.50",
-                            "Precios de Servicios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            FormPrecios frm = new FormPrecios();
+            frm.ShowDialog();
         }
 
         private void actualizarToolStripMenuItem_Click(object sender, System.EventArgs e)
